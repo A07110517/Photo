@@ -83,6 +83,10 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'1156210983@qq.com',
+		'avatarPath'=>'/data0/avatar/',
+		'dynamicPath'=>'/data0/dynamic/',
+		'avatarUrl'=>'192.168.135.130/avatar/',
+		'dynamicUrl'=>'192.168.135.130/dynamic/',
 	),
 );

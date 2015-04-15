@@ -1,5 +1,55 @@
 本工程主要是一个图片分享的网站；主要提供用户图片的上传、删除；及其他用户对该图片的评论等。
 
+建表语句:
+#user表:
+CREATE TABLE `user` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增用户id 10000000起',
+  `password` char(32) NOT NULL DEFAULT '' COMMENT '用户密码（md5加密）',
+  `nickname` varchar(32) NOT NULL DEFAULT '' COMMENT '用户昵称',
+  `email` varchar(64) DEFAULT '' COMMENT '用户邮箱',
+  `phone` int(11) NOT NULL DEFAULT '1234567890' COMMENT '用户手机号',
+  `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '用户性别：0为女性，1为男性',
+  `reg_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `last_login_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后登录时间',
+  `birthday` date DEFAULT NULL COMMENT '用户生日',
+  `avatar` char(16) NOT NULL DEFAULT '' COMMENT '用户头像',
+  `role` tinyint(2) NOT NULL DEFAULT '1' COMMENT '用户角色，0为超级管理员，1为普通用户，2为审核人员；默认为1',
+  PRIMARY KEY (`uid`),
+  KEY `idx_nickname_sex` (`nickname`,`sex`),
+  KEY `idx_phone_sex` (`phone`,`sex`),
+  KEY `idx_last_login_time` (`last_login_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#dynamic表:
+CREATE TABLE `dynamic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  `praise_num` int(11) NOT NULL DEFAULT '0' COMMENT '动态被赞的数量',
+  `boo_num` int(11) NOT NULL DEFAULT '0' COMMENT '动态被踩的数量',
+  `content` varchar(256) NOT NULL DEFAULT '' COMMENT '评论的内容',
+  `pic_path` char(16) NOT NULL DEFAULT '' COMMENT '动态名',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0为未被删除，1为已经删除',
+  `type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '动态类型：0为普通动态，1为置顶动态',
+  PRIMARY KEY (`id`),
+  KEY `idx_uid` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#comment表:
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `did` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '动态id',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
+  `to_uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '被评论用户id',
+  `content` varchar(256) NOT NULL DEFAULT '' COMMENT '评论的内容',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0为未被删除，1为已经删除',
+  PRIMARY KEY (`id`),
+  KEY `idx_did` (`did`),
+  KEY `idx_uid_to_uid` (`uid`,`to_uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 吴亚东
 2015-04-09

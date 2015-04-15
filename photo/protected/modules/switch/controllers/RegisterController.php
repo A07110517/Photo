@@ -38,6 +38,15 @@ class RegisterController extends Controller
             Common::json_return(-1, "两次密码输入不一致", array());
         }
 
+        //该用户是否已经被注册
+        $criteria = new CDbCriteria();
+        $criteria->condtion = "phone = '{$phone}' or email = '{$email}' or nickname = '{$nickname}'";
+        $is_register = User::model()->find($criteria);
+        if($is_register)
+        {
+            Common::json_return(-1, "该用户已经被注册", array());
+        }
+
         //默认性别为女
         if(!isset($sex) || empty($sex))
         {
