@@ -88,5 +88,6 @@ return array(
 		'dynamicPath'=>'/data0/dynamic/',
 		'avatarUrl'=>'192.168.135.130/avatar/',
 		'dynamicUrl'=>'192.168.135.130/dynamic/',
+		'bootstrapUrl'=>"http://www.bootcss.com/p/layoutit/css/",
 	),
 );
