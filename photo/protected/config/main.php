@@ -37,6 +37,9 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		'session'=>array(
+			'timeout'=>1500,
+		),
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(
@@ -89,5 +92,6 @@ return array(
 		'avatarUrl'=>'192.168.135.130/avatar/',
 		'dynamicUrl'=>'192.168.135.130/dynamic/',
 		'bootstrapUrl'=>"http://www.bootcss.com/p/layoutit/css/",
+		'baseUrl'=>'192.168.135.130/'
 	),
 );

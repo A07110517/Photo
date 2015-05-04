@@ -27,9 +27,19 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$offset = Yii::app()->request->getParam("offset");
+		if(!isset($offset) || empty($offset))
+		{
+			$offset = 0;
+		}
+
+		$criteria = new CDbCriteria();
+		$criteria->condition = "is_deleted = 0";
+		$criteria->order = "update_time desc";
+		$criteria->limit = 6;
+		$criteria->offset = 6 * $offset;
+		$dynamic = Dynamic::model()->findAll($criteria);
+		$this->render('index', array('dynamic'=>$dynamic));
 	}
 
 	/**

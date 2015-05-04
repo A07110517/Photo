@@ -10,6 +10,14 @@
 class LoginController extends Controller
 {
     /**
+     * 登录首页
+     */
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
+
+    /**
      * @since: 2015-04-10
      * @author: asif<1156210983@qq.com>
      * @version: 用户登录接口
@@ -46,6 +54,20 @@ class LoginController extends Controller
         }
 
         //验证通过返回成功
+        //存入session
+        Yii::app()->session['user_name'] = $user->nickname;
+        Yii::app()->session['user_id'] = $user->uid;
+        Yii::app()->session['user_role'] = $user->role;
+        //存入session end
         Common::json_return(0, "success", array($user));
+    }
+
+    public function actionLogout()
+    {
+        unset(Yii::app()->session['user_name']);
+        unset(Yii::app()->session['user_id']);
+        unset(Yii::app()->session['user_role']);
+        Yii::app()->user->logout();
+        $this->redirect('index.php');
     }
 }

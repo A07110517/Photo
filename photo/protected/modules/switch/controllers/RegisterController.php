@@ -10,6 +10,14 @@
 class RegisterController extends Controller
 {
     /**
+     * 注册首页
+     */
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
+
+    /**
      * @author: asif<1156210983@qq.com>
      * @date: 2015-04-11
      * @version: 用户这侧接口
@@ -40,7 +48,7 @@ class RegisterController extends Controller
 
         //该用户是否已经被注册
         $criteria = new CDbCriteria();
-        $criteria->condtion = "phone = '{$phone}' or email = '{$email}' or nickname = '{$nickname}'";
+        $criteria->condition = "phone = '{$phone}' or email = '{$email}' or nickname = '{$nickname}'";
         $is_register = User::model()->find($criteria);
         if($is_register)
         {
@@ -69,11 +77,15 @@ class RegisterController extends Controller
         $user->email = $email;
         $user->sex = $sex;
         $user->birthday = $birthday;
-        $user->uodate_time = $now;
+        $user->last_login_time = $now;
         $user->reg_time = $now;
 
         if($user->save())
         {
+            //存入session
+            Yii::app()->session['user_name'] = $nickname;
+            Yii::app()->session['user_id'] = $user->attributes['uid'];
+            Yii::app()->session['user_role'] = 1;
             Common::json_return(0, "注册成功", array($user));
         }
         else

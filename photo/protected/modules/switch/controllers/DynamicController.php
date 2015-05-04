@@ -10,14 +10,30 @@
 class DynamicController extends Controller
 {
     /**
+     * 动态首页
+     */
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
+
+    /**
      * @author: asif<1156210983@qq.com>
      * @version: 发布动态
      * @date: 2015-04-15
      */
     public function actionAddDynamic()
     {
-        $uid = Yii::app()->request->getParam('uid');
+        //判断是否登录
+        $uid = Yii::app()->session['user_id'];
+        if(!isset($uid) || empty($uid))
+        {
+            $this->render('../login/index');
+            Yii::app()->end();
+        }
+
         $content = Yii::app()->request->getParam('content');
+
         $now = date("Y-m-d H:i:s", time());
 
         $name = Yii::app()->params['dynamicPath'];

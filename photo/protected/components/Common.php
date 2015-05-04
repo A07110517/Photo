@@ -37,7 +37,7 @@ class Common
         $dir1 = substr($dir_md5, 0, 2);
         $dir2 = substr($dir_md5, 2, 2);
 
-        $save_path = $path.'/'.$dir1.'/'.$dir2.'/'.$file_name.'jpg';
+        $save_path = $path.'/'.$dir1.'/'.$dir2.'/'.$file_name.'.jpg';
 
         //存储类型
         $uptypes=array(
