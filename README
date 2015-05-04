@@ -7,7 +7,7 @@ CREATE TABLE `user` (
   `password` char(32) NOT NULL DEFAULT '' COMMENT '用户密码（md5加密）',
   `nickname` varchar(32) NOT NULL DEFAULT '' COMMENT '用户昵称',
   `email` varchar(64) DEFAULT '' COMMENT '用户邮箱',
-  `phone` int(11) NOT NULL DEFAULT '1234567890' COMMENT '用户手机号',
+  `phone` bigint(11) NOT NULL DEFAULT '1234567890' COMMENT '用户手机号',
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '用户性别：0为女性，1为男性',
   `reg_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `last_login_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后登录时间',
@@ -18,7 +18,7 @@ CREATE TABLE `user` (
   KEY `idx_nickname_sex` (`nickname`,`sex`),
   KEY `idx_phone_sex` (`phone`,`sex`),
   KEY `idx_last_login_time` (`last_login_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8;
 
 #dynamic表:
 CREATE TABLE `dynamic` (
