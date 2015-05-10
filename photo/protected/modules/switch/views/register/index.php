@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:150px;">
     <div class="row-fluid">
         <div class="span12">
             <form action="index.php?r=switch/register/register" method="post">
@@ -8,7 +8,7 @@
                         <label>昵称:</label>
                     </p>
                     <p>
-                        <input type="text" name="nickname"/>
+                        <input type="text" name="nickname" maxlength="31"/>
                     </p>
                     <p>
                         <label>密码:</label>

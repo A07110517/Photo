@@ -1,0 +1,7 @@
+div img
+{
+    max-width:600px;
+    width:600px; //所有浏览器中图片的大小为600px;
+    width:expression(document.body.clientWidth>600?"600px":"auto");
+    overflow:hidden;
+}

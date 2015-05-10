@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:150px;">
     <div class="row-fluid">
         <div class="span12">
             <form action="index.php?r=switch/login/login" method="post">

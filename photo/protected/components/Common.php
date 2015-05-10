@@ -95,11 +95,15 @@ class Common
         $path = "";
         if($type == "avatar")
         {
-            $path = Yii::app()->params['avatarUrl'];
+            $path = 'avatar/';
         }
         elseif($type == "dynamic")
         {
-            $path = Yii::app()->params['photoUrl'];
+            $path = 'dynamic/';
+        }
+        else
+        {
+            return "";
         }
 
         $path .= $dir1.'/'.$dir2.'/';

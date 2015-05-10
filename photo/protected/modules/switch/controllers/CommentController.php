@@ -17,8 +17,8 @@ class CommentController extends Controller
     public function actionAddComment()
     {
         $did = Yii::app()->request->getParam('id');
-        $uid = Yii::app()->request->getParam('uid');
         $to_uid = Yii::app()->request->getParam('to_uid');
+        $uid = Yii::app()->session['user_id'];
         $content = Yii::app()->request->getParam('content');
         $now = date("Y-m-d H:i:s", time());
 
@@ -31,6 +31,7 @@ class CommentController extends Controller
         $comment->uid = $uid;
         $comment->did = $did;
         $comment->to_uid = $to_uid;
+        $comment->content = $content;
         $comment->create_time = $now;
 
         if($comment->save())
@@ -45,7 +46,7 @@ class CommentController extends Controller
             {
                 Common::json_return(-1, "没有找到您要评论的动态", array());
             }
-            Common::json_return(1, "发布成功", array());
+            $this->redirect(array('dynamic/detail', 'id'=>$did));
         }
         else
         {

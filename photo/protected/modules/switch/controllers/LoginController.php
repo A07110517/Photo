@@ -14,6 +14,7 @@ class LoginController extends Controller
      */
     public function actionIndex()
     {
+        $this->setPageTitle('登录');
         $this->render('index');
     }
 
@@ -59,7 +60,7 @@ class LoginController extends Controller
         Yii::app()->session['user_id'] = $user->uid;
         Yii::app()->session['user_role'] = $user->role;
         //存入session end
-        Common::json_return(0, "success", array($user));
+        $this->redirect("index.php");
     }
 
     public function actionLogout()

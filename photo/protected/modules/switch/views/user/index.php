@@ -1,0 +1,131 @@
+<div class="container-fluid" style="margin-top:150px;">
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        用户名：
+                    </td>
+                    <td>
+                        asif
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td>
+                    </td>
+                    <td>
+                        联系电话：
+                    </td>
+                    <td>
+                        18614065341
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="error">
+                    <td>
+                    </td>
+                    <td>
+                        邮箱：
+                    </td>
+                    <td>
+                        1156210983@qq.com
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="warning">
+                    <td>
+                    </td>
+                    <td>
+                        性别：
+                    </td>
+                    <td>
+                        男
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="info">
+                    <td>
+                    </td>
+                    <td>
+                        注册时间：
+                    </td>
+                    <td>
+                        2015-05-01
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        生日：
+                    </td>
+                    <td>
+                        1991-06-06
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td>
+                    </td>
+                    <td>
+                        动态发布数量：
+                    </td>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="error">
+                    <td>
+                    </td>
+                    <td>
+                        邮箱：
+                    </td>
+                    <td>
+                        1156210983@qq.com
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="warning">
+                    <td>
+                    </td>
+                    <td>
+                        最后一条动态：
+                    </td>
+                    <td>
+                        好萌
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="info">
+                    <td>
+                    </td>
+                    <td>
+                        修改密码
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

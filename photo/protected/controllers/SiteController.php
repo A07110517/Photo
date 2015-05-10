@@ -27,6 +27,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$this->setPageTitle('Photo Show');
 		$offset = Yii::app()->request->getParam("offset");
 		if(!isset($offset) || empty($offset))
 		{
@@ -39,7 +40,21 @@ class SiteController extends Controller
 		$criteria->limit = 6;
 		$criteria->offset = 6 * $offset;
 		$dynamic = Dynamic::model()->findAll($criteria);
-		$this->render('index', array('dynamic'=>$dynamic));
+
+		//返回的结果
+		$res = array();
+		foreach($dynamic as $key=>$val)
+		{
+			$user = User::model()->findByPk($val->uid);
+			$res[$key]['id'] = $val->id;
+			$res[$key]['nickname'] = $user->nickname;
+			$res[$key]['sex'] = $user->sex;
+			$res[$key]['pic_path'] = Common::getPath($user->uid, "dynamic").$val->pic_path.".jpg";
+			$res[$key]['content'] = $val->content;
+			$res[$key]['praise'] = $val->praise_num;
+			$res[$key]['boo'] = $val->boo_num;
+		}
+		$this->render('index', array('dynamic'=>$res));
 	}
 
 	/**

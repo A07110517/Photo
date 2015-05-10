@@ -14,6 +14,7 @@ class DynamicController extends Controller
      */
     public function actionIndex()
     {
+        $this->setPageTitle('发布动态');
         $this->render('index');
     }
 
@@ -50,7 +51,7 @@ class DynamicController extends Controller
 
         if($dynamic->save())
         {
-            Common::json_return(1, "发布成功", array());
+            $this->redirect("index.php");
         }
         else
         {
@@ -73,7 +74,7 @@ class DynamicController extends Controller
             $dynamic->is_deleted = 1;
             if($dynamic->save())
             {
-                Common::json_return(1, "删除成功", array());
+                $this->redirect("index.php");
             }
             else
             {
@@ -83,6 +84,57 @@ class DynamicController extends Controller
         else
         {
             Common::json_return(-1, "没有这条动态", array());
+        }
+    }
+
+    /**
+     * 点赞
+     */
+    public function actionPraise()
+    {
+        $id = Yii::app()->request->getParam('id');
+        $dynamic = Dynamic::model()->findByPk($id);
+        if(isset($dynamic) && !empty($dynamic))
+        {
+            $dynamic->praise_num++;
+            $dynamic->save();
+        }
+        $this->redirect("index.php");
+    }
+
+    /**
+     * 点踩
+     */
+    public function actionBoo()
+    {
+        $id = Yii::app()->request->getParam('id');
+        $dynamic = Dynamic::model()->findByPk($id);
+        if(isset($dynamic) && !empty($dynamic))
+        {
+            $dynamic->boo_num++;
+            $dynamic->save();
+        }
+        $this->redirect("index.php");
+    }
+
+    public function actionDetail()
+    {
+        $this->setPageTitle('动态详情');
+        $id = Yii::app()->request->getParam('id');
+
+        $dynamic = Dynamic::model()->findByPk($id);
+        if(isset($dynamic) && !empty($dynamic))
+        {
+            $user = User::model()->findByPk($dynamic->uid);
+            $criteria = new CDbCriteria();
+            $criteria->condition = "did = '{$id}' and is_deleted=0";
+            $comment = Comment::model()->findAll($criteria);
+
+            $this->render("detail", array('dynamic'=>$dynamic, 'comment'=>$comment, 'nickname'=>$user->nickname));
+        }
+        else
+        {
+            $this->redirect("index.php");
         }
     }
 }

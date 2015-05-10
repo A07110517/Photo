@@ -10,6 +10,15 @@
 class UserController extends Controller
 {
     /**
+     * 个人资料首页
+     */
+    public function actionIndex()
+    {
+        $this->setPageTitle('登录');
+        $this->render('index');
+    }
+
+    /**
      * @author: asif<11562310983@qq.com>
      * @date: 2015-04-13
      * @params: $uid

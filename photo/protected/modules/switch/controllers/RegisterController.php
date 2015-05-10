@@ -14,6 +14,7 @@ class RegisterController extends Controller
      */
     public function actionIndex()
     {
+        $this->setPageTitle('注册');
         $this->render('index');
     }
 
@@ -86,7 +87,7 @@ class RegisterController extends Controller
             Yii::app()->session['user_name'] = $nickname;
             Yii::app()->session['user_id'] = $user->attributes['uid'];
             Yii::app()->session['user_role'] = 1;
-            Common::json_return(0, "注册成功", array($user));
+            $this->redirect("index.php");
         }
         else
         {
@@ -102,6 +103,7 @@ class RegisterController extends Controller
      */
     public function actionModifyPassword()
     {
+        $this->setPageTitle('修改密码');
         $uid = Yii::app()->request->getParam('uid');
         $oldpassword = Yii::app()->request->getParam('oldpassword');
         $password = Yii::app()->request->getParam('password');
