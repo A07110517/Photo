@@ -126,6 +126,12 @@ class DynamicController extends Controller
 
     public function actionDetail()
     {
+        $uid = Yii::app()->session['user_id'];
+        if(!isset($uid) || empty($uid))
+        {
+            $this->render("../login/index");
+        }
+
         $this->setPageTitle('动态详情');
         $id = Yii::app()->request->getParam('id');
 
