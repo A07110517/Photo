@@ -14,8 +14,18 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $this->setPageTitle('登录');
-        $this->render('index');
+        $this->setPageTitle('个人详情');
+        $uid = Yii::app()->session['user_id'];
+        $user = User::model()->findByPk($uid);
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = "uid = '{$uid}'";
+        $num = Dynamic::model()->count($criteria);
+        $criteria->limit = 1;
+        $criteria->order = "id desc";
+        $dynamic = Dynamic::model()->find($criteria);
+
+        $this->render('index', array('user'=>$user, 'num'=>$num, 'dynamic'=>$dynamic));
     }
 
     /**
@@ -94,5 +104,11 @@ class UserController extends Controller
         {
             Common::json_return(-1, "没有这个用户", array());
         }
+    }
+
+    public function actionModifyPassword()
+    {
+        $this->setPageTitle('修改密码');
+        $this->render("password");
     }
 }

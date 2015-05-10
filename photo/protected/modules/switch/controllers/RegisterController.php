@@ -104,7 +104,7 @@ class RegisterController extends Controller
     public function actionModifyPassword()
     {
         $this->setPageTitle('修改密码');
-        $uid = Yii::app()->request->getParam('uid');
+        $uid = Yii::app()->session['user_id'];
         $oldpassword = Yii::app()->request->getParam('oldpassword');
         $password = Yii::app()->request->getParam('password');
         $password_compire = Yii::app()->request->getParam('password_compire');
@@ -132,7 +132,7 @@ class RegisterController extends Controller
         $user->password = $password;
         if($user->save())
         {
-            Common::json_return(1, "修改成功", array());
+            $this->render("../user/password");
         }
         else
         {

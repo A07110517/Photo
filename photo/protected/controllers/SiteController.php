@@ -28,17 +28,33 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$this->setPageTitle('Photo Show');
-		$offset = Yii::app()->request->getParam("offset");
-		if(!isset($offset) || empty($offset))
-		{
-			$offset = 0;
-		}
+		$uid = Yii::app()->request->getParam('uid');
 
 		$criteria = new CDbCriteria();
-		$criteria->condition = "is_deleted = 0";
+		if(!isset($uid) || empty($uid))
+		{
+			$criteria->condition = "is_deleted = 0";
+		}
+		else
+		{
+			$criteria->condition = "uid = '{$uid}' && is_deleted = 0";
+		}
 		$criteria->order = "update_time desc";
 		$criteria->limit = 6;
-		$criteria->offset = 6 * $offset;
+
+		//分页start
+		$count = Dynamic::model()->count($criteria);
+
+		$pager = new CPagination($count);
+		$pager->pageSize = 6; //每页显示的行数
+		$pager->applyLimit($criteria);
+		if($uid)
+		{
+			$pager->params = array("uid"=>$uid);
+		}
+		//分页end
+
+		$criteria->offset = $pager->getOffset();
 		$dynamic = Dynamic::model()->findAll($criteria);
 
 		//返回的结果
@@ -54,7 +70,7 @@ class SiteController extends Controller
 			$res[$key]['praise'] = $val->praise_num;
 			$res[$key]['boo'] = $val->boo_num;
 		}
-		$this->render('index', array('dynamic'=>$res));
+		$this->render('index', array("pages"=>$pager, 'list'=>$dynamic, 'dynamic'=>$res));
 	}
 
 	/**

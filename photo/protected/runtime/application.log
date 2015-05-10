@@ -1253,3 +1253,45 @@ Stack trace:
 #3 /var/www/html/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
 #4 /var/www/html/photo/index.php(13): CApplication->run()
 #5 {main} REQUEST_URI=/index.php?r=switch/user/Index
+2015/05/10 18:21:54 [error] [exception.CException] exception 'CException' with message 'Property "CDbCriteria.uid" is not defined.' in /var/www/html/yii/framework/base/CComponent.php:174
+Stack trace:
+#0 /var/www/html/photo/protected/modules/switch/controllers/UserController.php(22): CComponent->__set('uid', '1000001')
+#1 /var/www/html/yii/framework/web/actions/CInlineAction.php(50): UserController->actionIndex()
+#2 /var/www/html/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#3 /var/www/html/yii/framework/web/CController.php(278): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/yii/framework/web/CWebApplication.php(278): CController->run('Index')
+#6 /var/www/html/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('switch/user/Ind...')
+#7 /var/www/html/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#8 /var/www/html/photo/index.php(13): CApplication->run()
+#9 {main} REQUEST_URI=/index.php?r=switch/user/Index
+2015/05/10 19:17:13 [error] [exception.CException] exception 'CException' with message 'RegisterController cannot find the requested view "../user/modifyPassword".' in /var/www/html/yii/framework/web/CController.php:875
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(779): CController->renderPartial('../user/modifyP...', NULL, true)
+#1 /var/www/html/photo/protected/modules/switch/controllers/RegisterController.php(135): CController->render('../user/modifyP...')
+#2 /var/www/html/yii/framework/web/actions/CInlineAction.php(50): RegisterController->actionModifyPassword()
+#3 /var/www/html/yii/framework/web/CController.php(300): CInlineAction->runWithParams(Array)
+#4 /var/www/html/yii/framework/web/CController.php(278): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/yii/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/yii/framework/web/CWebApplication.php(278): CController->run('modifyPassword')
+#7 /var/www/html/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('switch/register...')
+#8 /var/www/html/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#9 /var/www/html/photo/index.php(13): CApplication->run()
+#10 {main} REQUEST_URI=/index.php?r=switch/register/modifyPassword
+2015/05/10 19:21:00 [error] [php] Undefined variable: user (/var/www/html/photo/protected/modules/switch/views/user/index.php:13)
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(866): RegisterController->renderFile()
+#1 /var/www/html/yii/framework/web/CController.php(779): RegisterController->renderPartial()
+#2 /var/www/html/photo/protected/modules/switch/controllers/RegisterController.php(135): RegisterController->render()
+#3 /var/www/html/yii/framework/web/actions/CInlineAction.php(50): RegisterController->actionModifyPassword()
+#4 /var/www/html/yii/framework/web/CController.php(300): CInlineAction->runWithParams()
+#5 /var/www/html/yii/framework/web/CController.php(278): RegisterController->runAction()
+#6 /var/www/html/yii/framework/web/CController.php(257): RegisterController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(278): RegisterController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(136): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#10 /var/www/html/photo/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=switch/register/modifyPassword
+in /var/www/html/photo/protected/modules/switch/views/user/index.php (13)
+in /var/www/html/photo/protected/modules/switch/controllers/RegisterController.php (135)
+in /var/www/html/photo/index.php (13)

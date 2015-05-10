@@ -14,6 +14,13 @@ class DynamicController extends Controller
      */
     public function actionIndex()
     {
+        $uid = Yii::app()->session['user_id'];
+        if(!isset($uid) || empty($uid))
+        {
+            $this->render('../login/index');
+            Yii::app()->end();
+        }
+
         $this->setPageTitle('发布动态');
         $this->render('index');
     }

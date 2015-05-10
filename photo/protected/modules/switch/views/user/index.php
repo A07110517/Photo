@@ -10,9 +10,7 @@
                         用户名：
                     </td>
                     <td>
-                        asif
-                    </td>
-                    <td>
+                        <?php echo $user->nickname;?>
                     </td>
                 </tr>
                 <tr class="success">
@@ -22,9 +20,7 @@
                         联系电话：
                     </td>
                     <td>
-                        18614065341
-                    </td>
-                    <td>
+                        <?php echo $user->phone;?>
                     </td>
                 </tr>
                 <tr class="error">
@@ -34,9 +30,7 @@
                         邮箱：
                     </td>
                     <td>
-                        1156210983@qq.com
-                    </td>
-                    <td>
+                        <?php echo $user->email;?>m
                     </td>
                 </tr>
                 <tr class="warning">
@@ -46,9 +40,7 @@
                         性别：
                     </td>
                     <td>
-                        男
-                    </td>
-                    <td>
+                        <?php if(!$user->sex) echo "女"; else echo "男";?>
                     </td>
                 </tr>
                 <tr class="info">
@@ -58,25 +50,11 @@
                         注册时间：
                     </td>
                     <td>
-                        2015-05-01
-                    </td>
-                    <td>
+                        <?php echo $user->reg_time;?>
                     </td>
                 </tr>
                 </tbody>
                 <tbody>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        生日：
-                    </td>
-                    <td>
-                        1991-06-06
-                    </td>
-                    <td>
-                    </td>
-                </tr>
                 <tr class="success">
                     <td>
                     </td>
@@ -84,21 +62,17 @@
                         动态发布数量：
                     </td>
                     <td>
-                        5
-                    </td>
-                    <td>
+                        <a href="index.php?uid=<?php echo $user->uid;?>"><?php echo $num;?></a>
                     </td>
                 </tr>
                 <tr class="error">
                     <td>
                     </td>
                     <td>
-                        邮箱：
+                        生日：
                     </td>
                     <td>
-                        1156210983@qq.com
-                    </td>
-                    <td>
+                        <?php echo $user->birthday;?>
                     </td>
                 </tr>
                 <tr class="warning">
@@ -108,18 +82,14 @@
                         最后一条动态：
                     </td>
                     <td>
-                        好萌
-                    </td>
-                    <td>
+                        <a href="index.php?r=switch/dynamic/detail&id=<?php echo $dynamic->id;?>"><?php echo $dynamic->content;?></a>
                     </td>
                 </tr>
                 <tr class="info">
                     <td>
                     </td>
                     <td>
-                        修改密码
-                    </td>
-                    <td>
+                        <a href="index.php?r=switch/user/modifyPassword">修改密码</a>
                     </td>
                     <td>
                     </td>
