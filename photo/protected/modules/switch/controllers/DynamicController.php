@@ -124,6 +124,9 @@ class DynamicController extends Controller
         $this->redirect("index.php");
     }
 
+    /**
+     * 图片动态的详情
+     */
     public function actionDetail()
     {
         $uid = Yii::app()->session['user_id'];
@@ -141,9 +144,22 @@ class DynamicController extends Controller
             $user = User::model()->findByPk($dynamic->uid);
             $criteria = new CDbCriteria();
             $criteria->condition = "did = '{$id}' and is_deleted=0";
+
+            //分页start
+            $count = Comment::model()->count($criteria);
+
+            $pager = new CPagination($count);
+            $pager->pageSize = 20; //每页显示的行数
+            $pager->applyLimit($criteria);
+            if($id)
+            {
+                $pager->params = array("id"=>$id);
+            }
+            //分页end
+
             $comment = Comment::model()->findAll($criteria);
 
-            $this->render("detail", array('dynamic'=>$dynamic, 'comment'=>$comment, 'nickname'=>$user->nickname));
+            $this->render("detail", array('pages'=>$pager, 'dynamic'=>$dynamic, 'comment'=>$comment, 'nickname'=>$user->nickname));
         }
         else
         {

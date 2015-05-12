@@ -69,6 +69,7 @@ class SiteController extends Controller
 			$res[$key]['content'] = $val->content;
 			$res[$key]['praise'] = $val->praise_num;
 			$res[$key]['boo'] = $val->boo_num;
+			$res[$key]['uid'] = $val->uid;
 		}
 		$this->render('index', array("pages"=>$pager, 'list'=>$dynamic, 'dynamic'=>$res));
 	}

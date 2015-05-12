@@ -85,15 +85,21 @@
                         <a href="index.php?r=switch/dynamic/detail&id=<?php echo $dynamic->id;?>"><?php echo $dynamic->content;?></a>
                     </td>
                 </tr>
-                <tr class="info">
-                    <td>
-                    </td>
-                    <td>
-                        <a href="index.php?r=switch/user/modifyPassword">修改密码</a>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
+                <?php
+                if($uid == $to_uid) {
+                    ?>
+                    <tr class="info">
+                        <td>
+                        </td>
+                        <td>
+                            <a href="index.php?r=switch/user/modifyPassword">修改密码</a>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
                 </tbody>
             </table>
         </div>

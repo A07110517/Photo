@@ -15,7 +15,12 @@ class UserController extends Controller
     public function actionIndex()
     {
         $this->setPageTitle('个人详情');
-        $uid = Yii::app()->session['user_id'];
+        $my_uid = Yii::app()->session['user_id'];
+        $uid = Yii::app()->request->getParam('uid');
+        if(!isset($uid) || empty($uid))
+        {
+            $uid = $my_uid;
+        }
         $user = User::model()->findByPk($uid);
 
         $criteria = new CDbCriteria();
@@ -25,7 +30,7 @@ class UserController extends Controller
         $criteria->order = "id desc";
         $dynamic = Dynamic::model()->find($criteria);
 
-        $this->render('index', array('user'=>$user, 'num'=>$num, 'dynamic'=>$dynamic));
+        $this->render('index', array('uid'=>$my_uid, 'to_uid'=>$uid, 'user'=>$user, 'num'=>$num, 'dynamic'=>$dynamic));
     }
 
     /**

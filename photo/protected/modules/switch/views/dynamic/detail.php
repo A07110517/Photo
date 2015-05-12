@@ -10,7 +10,7 @@
                 foreach($comment as $key=>$val) {
                     ?>
                     <tr>
-                        <td><font color="blue"><?php $user=User::model()->findByPk($val->uid); echo $user->nickname."：";?></font><?php echo $val->content;?></td>
+                        <td><a href="index.php?r=switch/user/index&uid=<?php echo $val->uid;?>"><font color="blue"><?php $user=User::model()->findByPk($val->uid); echo $user->nickname."：";?></font></a><?php echo $val->content;?></td>
                         <td><font color="orange"><h6><?php echo $val->create_time;?></h6></font></td>
                     </tr>
                 <?php
@@ -30,6 +30,20 @@
             </form>
         </div>
     </div>
+</div>
+
+<div class="page">
+    <?php $this->widget('CLinkPager', array(
+            'header'=>'',
+            'firstPageLabel'=>'首页',
+            'lastPageLabel'=>'末页',
+            'prevPageLabel'=>'上一页',
+            'nextPageLabel'=>'下一页',
+            'pages'=>'$pages',
+            'maxButtonCount'=>10,
+            'pages' => $pages
+        )
+    ); ?>
 </div>
 
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/photo.css" />
