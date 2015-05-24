@@ -5,10 +5,18 @@
                 <fieldset>
                     <legend>登陆</legend>
                     <p>
+                        <font style="letter-spacing:1px" color="#FF0000">
+                        <?php
+                        if(isset($result) && !empty($result))
+                            echo '*'.$result;
+                        ?>
+                        </font>
+                    </p>
+                    <p>
                         <label>用户名:</label>
                     </p>
                     <p>
-                        <input type="text" name="username" />
+                        <input type="text" name="username" placeholder="用户名/手机号"/>
                     </p>
                     <p>
                         <label>密码:</label>

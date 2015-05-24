@@ -44,10 +44,16 @@ $uid = Yii::app()->session['user_id'];
 										<a class="btn btn-primary" href="index.php?r=switch/dynamic/praise&id=<?php echo $dynamic[$number]['id'];?>">赞(<?php echo $dynamic[$number]['praise'];?>)</a>
 										<a class="btn" href="index.php?r=switch/dynamic/boo&id=<?php echo $dynamic[$number]['id']?>">踩(<?php echo $dynamic[$number]['boo'];?>)</a>
 										<?php
-										if($role == 0 || $dynamic[$number]['uid'] == $uid) {
+										if(isset($role) && ($role == 0 || $dynamic[$number]['uid'] == $uid)) {
 											?>
 											<a class="btn btn-danger"
 											   href="index.php?r=switch/dynamic/delDynamic&id=<?php echo $dynamic[$number]['id']?>" onclick="return confirm('确认删除?');">删除</a>
+										<?php
+										}
+										if(isset($role) && $role == 0) {
+											?>
+											<a class="btn btn-success"
+											   href="index.php?r=switch/dynamic/top&id=<?php echo $dynamic[$number]['id']?>" onclick="return confirm('确认置顶?');">置顶</a>
 										<?php
 										}
 										?>

@@ -5,6 +5,14 @@
                 <fieldset>
                     <legend>修改密码</legend>
                     <p>
+                        <font style="letter-spacing:1px" color="#FF0000">
+                            <?php
+                            if(isset($result) && !empty($result))
+                                echo '*'.$result;
+                            ?>
+                        </font>
+                    </p>
+                    <p>
                         <label>原密码:</label>
                     </p>
                     <p>

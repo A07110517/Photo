@@ -34,7 +34,10 @@ class LoginController extends Controller
         //username或者password有一个为空就跑出异常
         if(!isset($username) || empty($username) || !isset($password) || empty($password))
         {
-            Common::json_return(-1, "用户名或密码为空", array());
+            $result = "用户名或密码为空";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "用户名或密码为空", array());
         }
 
         //检测数据库里面是否有这个用户
@@ -45,13 +48,19 @@ class LoginController extends Controller
         //如果为空，报错
         if(!isset($user) || empty($user))
         {
-            Common::json_return(-1, "没有这个用户", array());
+            $result = "没有这个用户";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "没有这个用户", array());
         }
 
         //查看密码是否输入正确
         if($password != $user->password)
         {
-            Common::json_return(-1, "密码错误", array());
+            $result = "密码错误";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "密码错误", array());
         }
 
         //验证通过返回成功

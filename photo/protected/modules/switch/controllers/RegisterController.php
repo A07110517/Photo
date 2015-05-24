@@ -38,13 +38,19 @@ class RegisterController extends Controller
         //必填项不能为空
         if(!isset($password) || empty($password) || !isset($phone) || empty($phone) || !isset($email) || empty($email) || !isset($nickname) || empty($nickname))
         {
-            Common::json_return(-1, "用户名，密码，手机号，邮箱都不能为空", array());
+            $result = "用户名，密码，手机号，邮箱都不能为空";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "用户名，密码，手机号，邮箱都不能为空", array());
         }
 
         //两次密码是否一样
         if($password != $password_compire)
         {
-            Common::json_return(-1, "两次密码输入不一致", array());
+            $result = "两次密码输入不一致";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "两次密码输入不一致", array());
         }
 
         //该用户是否已经被注册
@@ -53,7 +59,26 @@ class RegisterController extends Controller
         $is_register = User::model()->find($criteria);
         if($is_register)
         {
-            Common::json_return(-1, "该用户已经被注册", array());
+            $result = "该用户已经被注册";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "该用户已经被注册", array());
+        }
+
+        //手机号是不是合法
+        if(!preg_match("/1[3458]{1}\d{9}$/",$phone))
+        {
+            $result = "手机号不合法";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
+        }
+
+        //判断邮箱是不是合法
+        if(!preg_match("/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i", $email))
+        {
+            $result = "邮箱不合法";
+            $this->render('index', array('result'=>$result));
+            Yii::app()->end();
         }
 
         //默认性别为女
@@ -112,13 +137,19 @@ class RegisterController extends Controller
         //用户名和密码不能为空
         if(!isset($uid) || empty($uid) || !isset($oldpassword) || empty($oldpassword) || !isset($password) || empty($password))
         {
-            Common::json_return(-1, "用户id密码不能为空", array());
+            $result = "输入不能为空";
+            $this->render('../user/password', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "用户id密码不能为空", array());
         }
 
         //两次输入的密码必须一致
         if($password != $password_compire)
         {
-            Common::json_return(-1, "两次输入的密码不一致", array());
+            $result = "两次输入的密码不一致";
+            $this->render('../user/password', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "两次输入的密码不一致", array());
         }
 
         $oldpassword = md5($oldpassword);
@@ -126,13 +157,19 @@ class RegisterController extends Controller
         $user = User::model()->findByPk($uid);
         if($user->password != $oldpassword)
         {
-            Common::json_return(-1, "原密码错误", array());
+            $result = "原密码错误";
+            $this->render('../user/password', array('result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "原密码错误", array());
         }
 
         $user->password = $password;
         if($user->save())
         {
-            $this->render("../user/password");
+            $result = "<script>
+                alert('修改成功');
+                </script>";
+            $this->render('../user/password', array('result'=>$result));
         }
         else
         {

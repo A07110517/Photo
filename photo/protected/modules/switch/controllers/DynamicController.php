@@ -133,6 +133,7 @@ class DynamicController extends Controller
         if(!isset($uid) || empty($uid))
         {
             $this->render("../login/index");
+            Yii::app()->end();
         }
 
         $this->setPageTitle('动态详情');
@@ -159,11 +160,28 @@ class DynamicController extends Controller
 
             $comment = Comment::model()->findAll($criteria);
 
-            $this->render("detail", array('pages'=>$pager, 'dynamic'=>$dynamic, 'comment'=>$comment, 'nickname'=>$user->nickname));
+            $this->render("detail", array('pages'=>$pager, 'dynamic'=>$dynamic, 'comment'=>$comment, 'nickname'=>$user->nickname, 'result'=>Yii::app()->request->getParam('result')));
         }
         else
         {
             $this->redirect("index.php");
         }
+    }
+
+    /**
+     * 图片置顶
+     */
+    public function actionTop()
+    {
+        $id = Yii::app()->request->getParam('id');
+        $dynamic = Dynamic::model()->findByPk($id);
+        $now = date("Y-m-d H:i:s", time());
+
+        if(isset($dynamic) && !empty($dynamic))
+        {
+            $dynamic->update_time = $now;;
+            $dynamic->save();
+        }
+        $this->redirect("index.php");
     }
 }

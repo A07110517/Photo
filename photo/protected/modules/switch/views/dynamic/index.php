@@ -10,7 +10,7 @@
                         <label>描述：</label>
                     </p>
                     <p>
-                        <input type="text" name="content" maxlength="255"/>
+                        <input type="text" name="content" maxlength="255" title="添加描述别人可能更容易理解哦~"/>
                     </p>
                     <p>
                         <label>图片：<font style="letter-spacing:1px" color="#FF0000">*只允许上传jpg|png|bmp|pjpeg|gif格式的图片</font></label>

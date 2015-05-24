@@ -24,7 +24,10 @@ class CommentController extends Controller
 
         if(!isset($did) || empty($did) || !isset($uid) || empty($uid) || !isset($content) || empty($content))
         {
-            Common::json_return(-1, "参数不能为空", array());
+            $result = "参数不能为空";
+            $this->redirect(array('dynamic/detail', 'id'=>$did, 'result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "参数不能为空", array());
         }
 
         $comment = new Comment();
@@ -44,13 +47,19 @@ class CommentController extends Controller
             }
             else
             {
-                Common::json_return(-1, "没有找到您要评论的动态", array());
+                $result = "没有找到您要评论的动态";
+                $this->redirect(array('dynamic/detail', 'id'=>$did, 'result'=>$result));
+                Yii::app()->end();
+                //Common::json_return(-1, "没有找到您要评论的动态", array());
             }
             $this->redirect(array('dynamic/detail', 'id'=>$did));
         }
         else
         {
-            Common::json_return(-1, "发布失败", array());
+            $result = "发布失败";
+            $this->redirect(array('dynamic/detail', 'id'=>$did, 'result'=>$result));
+            Yii::app()->end();
+            //Common::json_return(-1, "发布失败", array());
         }
     }
 
@@ -69,7 +78,7 @@ class CommentController extends Controller
             $comment->is_deleted = 1;
             if($comment->save())
             {
-                Common::json_return(1, "删除成功", array());
+                $this->redirect(array('dynamic/detail', 'id'=>$comment->did));
             }
             else
             {

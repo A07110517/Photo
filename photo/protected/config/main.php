@@ -40,6 +40,11 @@ return array(
 		'session'=>array(
 			'timeout'=>1500,
 		),
+		'jumps'=>array(
+			'class'=>'ext.jumpage.jumpage',
+			'successWait'=>5,//成功提示等待跳转时间，可以不指定，默认是3秒
+			'errorWait'=>3 //错误信息等待跳转时间，同上，默认3秒
+		),
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(

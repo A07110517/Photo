@@ -1,3 +1,13 @@
+<?php
+if(isset($result) && !empty($result))
+{
+?>
+    <script>
+        alert("<?php echo $result;?>");
+    </script>
+<?php
+}
+?>
 <div class="container-fluid" style="margin-top:150px;">
     <div class="row-fluid">
         <div class="span12">
@@ -10,8 +20,9 @@
                 foreach($comment as $key=>$val) {
                     ?>
                     <tr>
-                        <td><a href="index.php?r=switch/user/index&uid=<?php echo $val->uid;?>"><font color="blue"><?php $user=User::model()->findByPk($val->uid); echo $user->nickname."：";?></font></a><?php echo $val->content;?></td>
-                        <td><font color="orange"><h6><?php echo $val->create_time;?></h6></font></td>
+                        <td width="70%"><a href="index.php?r=switch/user/index&uid=<?php echo $val->uid;?>"><font color="blue"><?php $user=User::model()->findByPk($val->uid); echo $user->nickname."：";?></font></a><?php echo $val->content;?></td>
+                        <td width="20%"><font color="orange"><h6><?php echo $val->create_time;?></h6></font></td>
+                        <td width="10%"><a href="index.php?r=switch/comment/delComment&id=<?php echo $val->id?>" onclick="return confirm('确认删除?');"><font color="red">删除</font></a></td>
                     </tr>
                 <?php
                 }
@@ -21,7 +32,7 @@
                 <fieldset>
                     <legend>添加评论</legend>
                     <p>
-                        <textarea name="content" style="width: 600px; height: 273px"></textarea>
+                        <textarea name="content" style="width: 600px; height: 273px" placeholder="请输入您的评论"></textarea>
                     </p>
                     <p>
                         <button class="btn" type="submit">评论</button>
