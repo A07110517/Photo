@@ -97,6 +97,7 @@ return array(
 		'avatarUrl'=>'192.168.135.130/avatar/',
 		'dynamicUrl'=>'192.168.135.130/dynamic/',
 		'bootstrapUrl'=>"http://www.bootcss.com/p/layoutit/css/",
+		//'bootstrapUrl'=>"http://192.168.135.130/static/dist/css/",
 		'baseUrl'=>'192.168.135.130/'
 	),
 );
