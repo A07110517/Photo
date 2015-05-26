@@ -82,7 +82,17 @@
                         最后一条动态：
                     </td>
                     <td>
-                        <a href="index.php?r=switch/dynamic/detail&id=<?php echo $dynamic->id;?>"><?php echo $dynamic->content;?></a>
+                        <?php
+                        if($dynamic) {
+                            ?>
+                            <a href="index.php?r=switch/dynamic/detail&id=<?php echo $dynamic->id;?>"><?php echo $dynamic->content;?></a>
+                        <?php
+                        }
+                        else
+                        {
+                            echo "无";
+                        }
+                        ?>
                     </td>
                 </tr>
                 <?php

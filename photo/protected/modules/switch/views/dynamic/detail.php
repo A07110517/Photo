@@ -1,4 +1,6 @@
 <?php
+$user_id = Yii::app()->session['user_id'];
+$role = Yii::app()->session['user_role'];
 if(isset($result) && !empty($result))
 {
 ?>
@@ -22,7 +24,14 @@ if(isset($result) && !empty($result))
                     <tr>
                         <td width="70%"><a href="index.php?r=switch/user/index&uid=<?php echo $val->uid;?>"><font color="blue"><?php $user=User::model()->findByPk($val->uid); echo $user->nickname."：";?></font></a><?php echo $val->content;?></td>
                         <td width="20%"><font color="orange"><h6><?php echo $val->create_time;?></h6></font></td>
-                        <td width="10%"><a href="index.php?r=switch/comment/delComment&id=<?php echo $val->id?>" onclick="return confirm('确认删除?');"><font color="red">删除</font></a></td>
+                        <?php
+                        if(($user_id==$val->uid) || (isset($role)&&$role==0)) {
+                            ?>
+                            <td width="10%"><a href="index.php?r=switch/comment/delComment&id=<?php echo $val->id?>"
+                                               onclick="return confirm('确认删除?');"><font color="red">删除</font></a></td>
+                        <?php
+                        }
+                        ?>
                     </tr>
                 <?php
                 }
